@@ -11,7 +11,7 @@ import com.zbqmal.gtcp_10.Account.ForgotPasswordActivity;
 import com.zbqmal.gtcp_10.Police.PoliceHomeActivity;
 import com.zbqmal.gtcp_10.R;
 import com.zbqmal.gtcp_10.Student.StudentHomeActivity;
-//
+
 public class MainActivity extends AppCompatActivity {
 
     @Override

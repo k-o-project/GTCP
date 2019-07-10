@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainColor"
+    tools:context=".Account.CreateAccountActivity">
+
+    <ScrollView
+        android:id="@+id/createAccountScrollView"
+        android:layout_width="407dp"
+        android:layout_height="670dp"
+        android:layout_marginTop="61dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <RadioGroup
+                android:id="@+id/userTypeSelect_RadioGroup"
+                android:layout_width="300dp"
+                android:layout_height="match_parent"
+                android:checkedButton="@id/Student_RadioBtn"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/Student_RadioBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="@color/common_google_signin_btn_text_dark_default"
+                    android:text="Student"
+                    android:textColor="#FFFFFF" />
+
+                <RadioButton
+                    android:id="@+id/GTPD_RadioBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="@color/common_google_signin_btn_text_dark_default"
+                    android:text="GTPD"
+                    android:textColor="#FFFFFF" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/createUsernameText"
+                android:layout_width="300dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="GT# / GTPD#"
+                android:textColor="@color/common_google_signin_btn_text_dark_default"
+                android:textSize="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <EditText
+                android:id="@+id/createUsername"
+                android:layout_width="300dp"
+                android:layout_height="45dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/inputfield_shape"
+                android:ems="10"
+                android:inputType="number"
+                android:textColor="@android:color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.495"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/createUsernameText"
+                app:layout_constraintVertical_bias="0.017" />
+
+            <TextView
+                android:id="@+id/createEmailAddressText"
+                android:layout_width="300dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Email Address"
+                android:textColor="@color/common_google_signin_btn_text_dark_default"
+                android:textSize="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.191"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.687" />
+
+            <EditText
+                android:id="@+id/createEmailAddress"
+                android:layout_width="300dp"
+                android:layout_height="45dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/inputfield_shape"
+                android:ems="10"
+                android:inputType="text"
+                android:textColor="@android:color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.495"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/createEmailAddressText"
+                app:layout_constraintVertical_bias="0.068" />
+
+            <TextView
+                android:id="@+id/createPasswordText"
+                android:layout_width="300dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Password"
+                android:textColor="@color/common_google_signin_btn_text_dark_default"
+                android:textSize="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.189"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.185" />
+
+            <EditText
+                android:id="@+id/createPassword"
+                android:layout_width="300dp"
+                android:layout_height="45dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/inputfield_shape"
+                android:ems="10"
+                android:inputType="text"
+                android:textColor="@android:color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.495"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/createPasswordText"
+                app:layout_constraintVertical_bias="0.028" />
+
+            <TextView
+                android:id="@+id/createConfirmPasswordText"
+                android:layout_width="300dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Confirm Password"
+                android:textColor="@color/common_google_signin_btn_text_dark_default"
+                android:textSize="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.212"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.355" />
+
+            <EditText
+                android:id="@+id/createConfirmPassword"
+                android:layout_width="300dp"
+                android:layout_height="45dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/inputfield_shape"
+                android:ems="10"
+                android:inputType="text"
+                android:textColor="@android:color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.495"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/createConfirmPasswordText"
+                app:layout_constraintVertical_bias="0.021" />
+
+            <TextView
+                android:id="@+id/createPhoneNumberText"
+                android:layout_width="300dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Phone #"
+                android:textColor="@color/common_google_signin_btn_text_dark_default"
+                android:textSize="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.158"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.519" />
+
+            <EditText
+                android:id="@+id/createPhoneNumber"
+                android:layout_width="300dp"
+                android:layout_height="45dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/inputfield_shape"
+                android:ems="10"
+                android:inputType="number"
+                android:textColor="@android:color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.495"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/createPhoneNumberText"
+                app:layout_constraintVertical_bias="0.035" />
+
+            <LinearLayout
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:gravity="fill_horizontal"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/createAccountSubmitBtn"
+                    android:layout_width="130dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/yellow_button_shape"
+                    android:text="VERIFY"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.996" />
+
+                <Button
+                    android:id="@+id/createAccountCancelBtn"
+                    android:layout_width="130dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/yellow_button_shape"
+                    android:onClick="goToMain"
+                    android:text="CANCEL"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.996" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

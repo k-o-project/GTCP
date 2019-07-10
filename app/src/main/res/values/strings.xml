@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">GTCP_1.0</string>
+    <color name="mainColor">#203f69</color>
+    <color name="ButtonMainColor">#f2b80d</color>
+    <color name="logOutButtonColor">#8b8b8b</color>
+    <string name="title_activity_police_home">Map</string>
+    <string name="title_activity_student_home">Map</string>
+    <string name="addHintText">Enter Address</string>
+</resources>

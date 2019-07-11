@@ -58,7 +58,7 @@ public class VerifyActivity extends AppCompatActivity {
 
                 String code = editText.getText().toString().trim();
                 if (code.isEmpty() || code.length() < 6) {
-                    editText.setError("Enter code...");
+                    editText.setError("Enter correct code");
                     editText.requestFocus();
                     return;
                 }
@@ -123,6 +123,17 @@ public class VerifyActivity extends AppCompatActivity {
                                     break;
 
                                 case "ForgotPassword":
+
+                                    //new intent
+                                    Intent intent1 = new Intent(VerifyActivity.this, ResetPasswordActivity.class);
+
+                                    //passing in user id
+                                    String userId = passedObject.getString("ID");
+                                    passedObject.putString("ID", userId);
+                                    intent1.putExtras(passedObject);
+
+                                    startActivity(intent1);
+
                                     break;
 
                                 default:

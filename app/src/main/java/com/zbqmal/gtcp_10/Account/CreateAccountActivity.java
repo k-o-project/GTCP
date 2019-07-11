@@ -110,11 +110,11 @@ public class CreateAccountActivity extends AppCompatActivity {
                         // Move to VerifyActivity, passing the values typed
                         Intent intent = new Intent(this, VerifyActivity.class);
                         Bundle extras = new Bundle();
-                        extras.putString("EXTRA_ID", currentID);
-                        extras.putString("EXTRA_PASSWORD", currentPassword);
-                        extras.putString("EXTRA_EMAILADDRESS", currentEmailAddress);
-                        extras.putString("EXTRA_PHONENUMBER", currentPhoneNumber);
-                        extras.putString("EXTRA_USERTYPE", selectedUserType);
+                        extras.putString("ID", currentID);
+                        extras.putString("PASSWORD", currentPassword);
+                        extras.putString("EMAILADDRESS", currentEmailAddress);
+                        extras.putString("PHONENUMBER", currentPhoneNumber);
+                        extras.putString("USERTYPE", selectedUserType);
                         extras.putString("WHERE_IS_FROM", "CreateAccount");
                         intent.putExtras(extras);
                         startActivity(intent);

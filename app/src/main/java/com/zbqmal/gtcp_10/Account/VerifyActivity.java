@@ -102,8 +102,12 @@ public class VerifyActivity extends AppCompatActivity {
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
                                     // User information
-                                    String userEmail = passedObject.getString("EMAILADDRESS");
+                                    String userID = passedObject.getString("ID");
                                     String userPassword = passedObject.getString("PASSWORD");
+                                    String userEmail = passedObject.getString("EMAILADDRESS");
+                                    String userPhoneNumber = passedObject.getString("PHONENUMBER");
+                                    String userUserType = passedObject.getString("USERTYPE");
+
 
                                     // Create User in Firebase with email and password
                                     mAuth.createUserWithEmailAndPassword(userEmail, userPassword)

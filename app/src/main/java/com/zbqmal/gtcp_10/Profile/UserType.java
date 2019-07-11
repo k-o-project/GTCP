@@ -11,6 +11,7 @@ public abstract class UserType {
 
     // User Information
     private String id;
+    private String uid;
     private String password;
     private String emailAddress;
     private String phoneNumber;
@@ -18,6 +19,7 @@ public abstract class UserType {
 
     // Setter
     public void setID(String newID) {id = newID;}
+    public void setUid(String newUID) {uid = newUID;}
     public void setPassword(String newPassword) {password = newPassword;}
     public void setEmailAddress(String newEmailAddress) {emailAddress = newEmailAddress;}
     public void setPhoneNumber(String newPhoneNumber) {phoneNumber = newPhoneNumber;}
@@ -25,6 +27,7 @@ public abstract class UserType {
 
     // Getter
     public String getID() {return id;}
+    public String getUid() {return uid;}
     public String getPassword() {return password;}
     public String getEmailAddress() {return emailAddress;}
     public String getPhoneNumber() {return phoneNumber;}

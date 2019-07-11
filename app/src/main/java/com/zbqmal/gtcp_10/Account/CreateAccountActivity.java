@@ -65,7 +65,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         String currentEmailAddress = emailAddressText.getText().toString();
         String currentPassword = passwordText.getText().toString();
         String currentConfirmPassword = confirmPasswordText.getText().toString();
-        String currentPhoneNumber = phoneNumberText.getText().toString();
+        String currentPhoneNumber = "+1" + phoneNumberText.getText().toString();
 
         // Check if the information is possible to be used.
         boolean isAllNotEmpty = !currentID.isEmpty() && !currentEmailAddress.isEmpty()
@@ -89,7 +89,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                 /*
                 TODO: Don't use PhoneNumberUtils.isGlobalPhoneNumber method.
                  */
-                boolean isPhoneNumberCorrect = PhoneNumberUtils.isGlobalPhoneNumber("+1" + currentPhoneNumber);
+                boolean isPhoneNumberCorrect = PhoneNumberUtils.isGlobalPhoneNumber(currentPhoneNumber);
                 if (isPhoneNumberCorrect) {
 
                     boolean isGoodToMove = false;

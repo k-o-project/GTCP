@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.zbqmal.gtcp_10.Account.CreateAccountActivity;
 import com.zbqmal.gtcp_10.Account.ForgotPasswordActivity;
 import com.zbqmal.gtcp_10.Police.PoliceHomeActivity;
@@ -19,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        System.out.println("<<<<<<<<<<<<<Current User : " + FirebaseAuth.getInstance().getCurrentUser() + " >>>>>>>>>>>>>>>>");
     }
 
     /**
@@ -61,14 +64,15 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//
-//        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-//            Intent intent = new Intent(this, StudentHomeActivity.class);
-//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//            startActivity(intent);
-//        }
-//    }
+    /**
+     * Let user sign out whenever be in MainActivity.
+     */
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            FirebaseAuth.getInstance().signOut();
+        }
+    }
 }

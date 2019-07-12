@@ -34,6 +34,7 @@ public class VerifyActivity extends AppCompatActivity {
     private Button confirmButton;
     private EditText editText;
 
+    // Authentication
     private String verificationId;
     private FirebaseAuth mAuth;
 
@@ -42,23 +43,22 @@ public class VerifyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify);
 
-        // Send verfication code first
-        /*
-        TODO: Uncomment after sendVerificationCode method has been completed.
-         */
-        //sendVerificationCode();
-
+        // Initialize authentication
         mAuth = FirebaseAuth.getInstance();
         editText = findViewById(R.id.verifyConfirmation);
+
+        // Send verfication code first
         String phoneNumber = getIntent().getExtras().getString("PHONENUMBER");
         sendVerificationCode(phoneNumber);
+
+        // Verify code sent
         findViewById(R.id.confirmVerificationBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 String code = editText.getText().toString().trim();
-                if (code.isEmpty() || code.length() < 6) {
-                    editText.setError("Enter correct code");
+                if (code.isEmpty() || code.length() != 6) {
+                    editText.setError("Enter 6 digits code.");
                     editText.requestFocus();
                     return;
                 }
@@ -78,11 +78,21 @@ public class VerifyActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Verify code and let it sign in with the credential made.
+     *
+     * @param code typed verification code
+     */
     private void verifyCode(String code) {
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, code);
         signInWithCredential(credential);
     }
 
+    /**
+     * Let user create user and sign in.
+     *
+     * @param credential
+     */
     private void signInWithCredential(PhoneAuthCredential credential) {
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -109,6 +119,8 @@ public class VerifyActivity extends AppCompatActivity {
                                     String userUserType = passedObject.getString("USERTYPE");
 
 
+                                    System.out.println("<<<<<<<<<<<<Current User1>>>>>>>>>>>>>>" + mAuth.getCurrentUser());
+
                                     // Create User in Firebase with email and password
                                     mAuth.createUserWithEmailAndPassword(userEmail, userPassword)
                                             .addOnCompleteListener(VerifyActivity.this, new OnCompleteListener<AuthResult>() {
@@ -116,12 +128,17 @@ public class VerifyActivity extends AppCompatActivity {
                                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                                     if (task.isSuccessful()) {
                                                         FirebaseUser user = mAuth.getCurrentUser();
+                                                        System.out.println("<<<<<<<<<<<<Current User2>>>>>>>>>>>>>>" + mAuth.getCurrentUser());
                                                     } else {
                                                         Toast.makeText(VerifyActivity.this, "Authentication failed.",
                                                                 Toast.LENGTH_SHORT).show();
                                                     }
                                                 }
                                             });
+
+                                    System.out.println("<<<<<<<<<<<<Current User3>>>>>>>>>>>>>>" + mAuth.getCurrentUser());
+                                    System.out.println("<<<<<<<<<<<<Current UID>>>>>>>>>>>>>>" + mAuth.getCurrentUser().getUid());
+                                    //
 
                                     startActivity(intent);
                                     break;
@@ -153,8 +170,9 @@ public class VerifyActivity extends AppCompatActivity {
     }
 
     /**
+     * Send verification code to user.
      *
-     * @param phoneNumber
+     * @param phoneNumber user's phone number
      */
     public void sendVerificationCode(String phoneNumber) {
 

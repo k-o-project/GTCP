@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.zbqmal.gtcp_10.Account.MyAccountActivity;
 import com.zbqmal.gtcp_10.R;
 
@@ -15,6 +16,8 @@ public class StudentHomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_home);
+
+        System.out.println("================ Current User is " + FirebaseAuth.getInstance().getCurrentUser().toString());
     }
 
     public void goToStartTrackingActivity(View view) {

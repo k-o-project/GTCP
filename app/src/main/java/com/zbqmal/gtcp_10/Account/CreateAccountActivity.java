@@ -12,6 +12,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.zbqmal.gtcp_10.Main.MainActivity;
 import com.zbqmal.gtcp_10.R;
 
@@ -31,6 +32,9 @@ public class CreateAccountActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
+
+        System.out.println("----------------------------- CreateAccountActivity ------------------------------");
+        System.out.println("<<<<<<<<<<<<<Current User : " + FirebaseAuth.getInstance().getCurrentUser() + " >>>>>>>>>>>>>>>>");
 
         // Assign widgets
         userTypeRadioGroup = findViewById(R.id.userTypeSelect_RadioGroup);
@@ -61,11 +65,11 @@ public class CreateAccountActivity extends AppCompatActivity {
         String selectedUserType = userTypeRadioButton.getText().toString().toLowerCase();
 
         // Get Information from EditText
-        String currentID = idText.getText().toString();
-        String currentEmailAddress = emailAddressText.getText().toString();
-        String currentPassword = passwordText.getText().toString();
-        String currentConfirmPassword = confirmPasswordText.getText().toString();
-        String currentPhoneNumber = "+1" + phoneNumberText.getText().toString();
+        String currentID = idText.getText().toString().trim();
+        String currentEmailAddress = emailAddressText.getText().toString().trim();
+        String currentPassword = passwordText.getText().toString().trim();
+        String currentConfirmPassword = confirmPasswordText.getText().toString().trim();
+        String currentPhoneNumber = "+1" + phoneNumberText.getText().toString().trim();
 
         // Check if the information is possible to be used.
         boolean isAllNotEmpty = !currentID.isEmpty() && !currentEmailAddress.isEmpty()
@@ -100,9 +104,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                         isGoodToMove = true;
                     } else {
                         // Exception
-                        Toast errorToastMessage = Toast.makeText(getApplicationContext(),
-                                "selectedUserType is student nor gtpd.",Toast.LENGTH_SHORT);
-                        errorToastMessage.show();
+                        Toast.makeText(getApplicationContext(), "selectedUserType is student nor gtpd.",Toast.LENGTH_SHORT).show();
                     }
 
                     if (isGoodToMove) {

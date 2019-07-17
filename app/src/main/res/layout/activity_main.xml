@@ -96,8 +96,8 @@
 
     <RadioGroup
         android:id="@+id/login_UserTypeSelect_RadioGroup"
-        android:layout_width="289dp"
-        android:layout_height="38dp"
+        android:layout_width="235dp"
+        android:layout_height="36dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -114,18 +114,22 @@
             android:id="@+id/login_Student_RadioBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:buttonTint="@color/common_google_signin_btn_text_dark_default"
             android:text="Student"
+            android:textAlignment="textStart"
             android:textColor="#FFFFFF" />
 
         <RadioButton
             android:id="@+id/login_GTPD_RadioBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:buttonTint="@color/common_google_signin_btn_text_dark_default"
             android:text="GTPD"
+            android:textAlignment="textStart"
             android:textColor="#FFFFFF" />
     </RadioGroup>
 

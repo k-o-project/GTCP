@@ -19,6 +19,18 @@ public class TrackingActivity extends AppCompatActivity {
 
     public void goToMyAccountActivity(View view) {
         Intent intent = new Intent(this, MyAccountActivity.class);
+        Bundle userData = getIntent().getExtras();
+
+        //get user's id and type
+        final String userID = userData.getString("ID");
+        final String userType = userData.getString("USERTYPE");
+
+        //passing user's id and type
+        userData.putString("ID",userID);
+        userData.putString("USERTYPE", userType);
+
+        intent.putExtras(userData);
+
         startActivity(intent);
     }
 

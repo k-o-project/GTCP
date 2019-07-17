@@ -62,7 +62,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
                             if (dataSnapshot.exists()) {
 
-                                DataSnapshot userPhoneNumDS = dataSnapshot.child("phone");
+                                DataSnapshot userPhoneNumDS = dataSnapshot.child("phoneNumber");
                                 String userPhoneNum = userPhoneNumDS.getValue().toString();
 
                                 Intent intent = new Intent(ForgotPasswordActivity.this, VerifyActivity.class);

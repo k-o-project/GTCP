@@ -157,7 +157,9 @@ public class VerifyActivity extends AppCompatActivity {
 
                 //passing in user id
                 String userId = passedObject.getString("ID");
+                String userType = passedObject.getString("USERTYPE");
                 passedObject.putString("ID", userId);
+                passedObject.putString("USERTYPE", userType);
                 intent1.putExtras(passedObject);
 
                 startActivity(intent1);

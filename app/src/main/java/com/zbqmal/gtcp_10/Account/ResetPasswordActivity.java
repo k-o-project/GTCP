@@ -59,9 +59,17 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
                     //user id
                     String userID = getIntent().getExtras().getString("ID");
+                    String userType = getIntent().getExtras().getString("USERTYPE");
 
-                    //set new value for password
-                    userRef.child("gtcp/user/student").child(userID).child("password").setValue(newPW.getText().toString());
+                    switch (userType) {
+
+                        case "student" :
+                            userRef.child("gtcp/user/student").child(userID).child("password").setValue(newPW.getText().toString());
+                            break;
+                        case "gtpd" :
+                            userRef.child("gtcp/user/police").child(userID).child("password").setValue(newPW.getText().toString());
+                            break;
+                    }
 
                     Intent intent = new Intent(ResetPasswordActivity.this, MainActivity.class);
                     startActivity(intent);

@@ -114,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
 
                         extras.putString("userID", username);
                         extras.putString("userUID", userUID);
+                        extras.putString("userType", "student");
                         intent.putExtras(extras);
                         startActivity(intent);
 
@@ -154,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
 
                         extras.putString("userID", username);
                         extras.putString("userUID", userUID);
+                        extras.putString("userType", "police");
                         intent.putExtras(extras);
                         startActivity(intent);
 

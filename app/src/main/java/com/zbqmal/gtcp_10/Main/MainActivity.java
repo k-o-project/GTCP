@@ -24,9 +24,6 @@ public class MainActivity extends AppCompatActivity {
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             FirebaseAuth.getInstance().signOut();
         }
-
-        System.out.println("----------------------------- MainActivity ------------------------------");
-        System.out.println("<<<<<<<<<<<<<Current User : " + FirebaseAuth.getInstance().getCurrentUser() + " >>>>>>>>>>>>>>>>");
     }
 
     /**

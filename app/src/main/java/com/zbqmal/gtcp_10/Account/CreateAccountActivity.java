@@ -33,9 +33,6 @@ public class CreateAccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
 
-        System.out.println("----------------------------- CreateAccountActivity ------------------------------");
-        System.out.println("<<<<<<<<<<<<<Current User : " + FirebaseAuth.getInstance().getCurrentUser() + " >>>>>>>>>>>>>>>>");
-
         // Assign widgets
         userTypeRadioGroup = findViewById(R.id.userTypeSelect_RadioGroup);
         idText = findViewById(R.id.createUsername);

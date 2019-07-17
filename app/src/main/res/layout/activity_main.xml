@@ -7,24 +7,22 @@
     android:background="@color/mainColor"
     tools:context=".Main.MainActivity">
 
+
     <Button
         android:id="@+id/loginButton"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/yellow_button_shape"
         android:onClick="goToStudentHomeActivity"
         android:text="Login"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.79" />
+        app:layout_constraintTop_toBottomOf="@+id/loginPassword" />
 
     <TextView
         android:id="@+id/forgotPasswordBtn"
@@ -32,8 +30,8 @@
         android:layout_height="19dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:clickable="true"
         android:onClick="goToForgotPassword"
         android:text="Forgot Password?"
@@ -44,7 +42,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/createAccountBtn"
-        app:layout_constraintVertical_bias="0.186" />
+        app:layout_constraintVertical_bias="0.037" />
 
     <TextView
         android:id="@+id/createAccountBtn"
@@ -67,71 +65,68 @@
         app:layout_constraintVertical_bias="0.296" />
 
     <EditText
-        android:id="@+id/Username"
+        android:id="@+id/loginUsername"
         android:layout_width="300dp"
         android:layout_height="45dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/inputfield_shape"
         android:ems="10"
+        android:hint="Username"
         android:inputType="number"
         android:textColor="@android:color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/UsernameText"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/login_UserTypeSelect_RadioGroup" />
 
     <EditText
-        android:id="@+id/Password"
+        android:id="@+id/loginPassword"
         android:layout_width="300dp"
         android:layout_height="45dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/inputfield_shape"
         android:ems="10"
+        android:hint="Password"
         android:inputType="text"
         android:textColor="@android:color/black"
-        app:layout_constraintBottom_toTopOf="@+id/loginButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PasswordText"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/loginUsername" />
 
-    <TextView
-        android:id="@+id/UsernameText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
+    <RadioGroup
+        android:id="@+id/login_UserTypeSelect_RadioGroup"
+        android:layout_width="289dp"
+        android:layout_height="38dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Username:"
-        android:textColor="@color/common_google_signin_btn_text_dark_default"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.158"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.392" />
-
-    <TextView
-        android:id="@+id/PasswordText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="164dp"
-        android:text="Password:"
-        android:textColor="@color/common_google_signin_btn_text_dark_default"
-        android:textSize="20sp"
+        android:layout_marginBottom="8dp"
+        android:checkedButton="@id/login_Student_RadioBtn"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.156"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.373" />
+        app:layout_constraintVertical_bias="0.534">>
+
+        <RadioButton
+            android:id="@+id/login_Student_RadioBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:buttonTint="@color/common_google_signin_btn_text_dark_default"
+            android:text="Student"
+            android:textColor="#FFFFFF" />
+
+        <RadioButton
+            android:id="@+id/login_GTPD_RadioBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:buttonTint="@color/common_google_signin_btn_text_dark_default"
+            android:text="GTPD"
+            android:textColor="#FFFFFF" />
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

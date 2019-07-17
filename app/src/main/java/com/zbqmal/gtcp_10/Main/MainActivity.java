@@ -5,9 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.zbqmal.gtcp_10.Account.CreateAccountActivity;
 import com.zbqmal.gtcp_10.Account.ForgotPasswordActivity;
 import com.zbqmal.gtcp_10.Police.PoliceHomeActivity;
@@ -16,14 +22,76 @@ import com.zbqmal.gtcp_10.Student.StudentHomeActivity;
 
 public class MainActivity extends AppCompatActivity {
 
+    // Widgets & pre-factor
+    private Button loginButton;
+    private EditText usernameInput;
+    private EditText passwordInput;
+    private RadioGroup userTypeRadioGroup;
+    private RadioButton userTypeRadioButton;
+    private DatabaseReference myRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // LOGOUT automatically everytime a user gets MainActivity
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             FirebaseAuth.getInstance().signOut();
         }
+
+        // Assign widgets & pre-factor
+        loginButton = findViewById(R.id.loginButton);
+        usernameInput = findViewById(R.id.loginUsername);
+        passwordInput = findViewById(R.id.loginPassword);
+        userTypeRadioGroup = findViewById(R.id.userTypeSelect_RadioGroup);
+
+        // When clicked LOGIN button
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loginButtonClicked();
+            }
+        });
+    }
+
+    /**
+     * Check if username and password are correct, and allows a user to log in.
+     */
+    private void loginButtonClicked() {
+
+        String username = usernameInput.getText().toString().trim();
+        String password = passwordInput.getText().toString().trim();
+        int selectedUserTypeID = userTypeRadioGroup.getCheckedRadioButtonId();
+        userTypeRadioButton = findViewById(selectedUserTypeID);
+        String selectedUserType = userTypeRadioButton.getText().toString().toLowerCase();
+
+        if (username.isEmpty()) {
+            usernameInput.setError("Enter your username");
+            return;
+        }
+
+        if (password.isEmpty()) {
+            passwordInput.setError("Enter your password");
+            return;
+        }
+
+        /*
+        TODO: More conditions using regex
+         */
+
+        // Student Login
+        if (selectedUserType.equals("student")) {
+            myRef = FirebaseDatabase.getInstance().getReference("gtcp/user/student").child(username);
+        }
+
+        // Police Login
+        if (selectedUserType.equals("gtpd")) {
+            myRef = FirebaseDatabase.getInstance().getReference("gtcp/user/police");
+        }
+
+        // If none of those types selected, Exception
+
     }
 
     /**

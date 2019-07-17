@@ -33,8 +33,8 @@ public class CreateAccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
 
+        System.out.println("----------------------------- CreateAccountActivity ------------------------------");
         System.out.println("<<<<<<<<<<<<<Current User : " + FirebaseAuth.getInstance().getCurrentUser() + " >>>>>>>>>>>>>>>>");
-        System.out.println("<<<<<<<<<<<<<Current UID : " + FirebaseAuth.getInstance().getCurrentUser().getUid() + " >>>>>>>>>>>>>>>>");
 
         // Assign widgets
         userTypeRadioGroup = findViewById(R.id.userTypeSelect_RadioGroup);
@@ -104,9 +104,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                         isGoodToMove = true;
                     } else {
                         // Exception
-                        Toast errorToastMessage = Toast.makeText(getApplicationContext(),
-                                "selectedUserType is student nor gtpd.",Toast.LENGTH_SHORT);
-                        errorToastMessage.show();
+                        Toast.makeText(getApplicationContext(), "selectedUserType is student nor gtpd.",Toast.LENGTH_SHORT).show();
                     }
 
                     if (isGoodToMove) {

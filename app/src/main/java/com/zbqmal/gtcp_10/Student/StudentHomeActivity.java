@@ -17,7 +17,7 @@ public class StudentHomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_home);
 
-        System.out.println("================ Current User is " + FirebaseAuth.getInstance().getCurrentUser().toString());
+        System.out.println("================ Current User is " + FirebaseAuth.getInstance().getCurrentUser());
     }
 
     public void goToStartTrackingActivity(View view) {

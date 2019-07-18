@@ -12,6 +12,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -35,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton userTypeRadioButton;
     private DatabaseReference myRef;
     private FirebaseAuth mAuth;
+    private FirebaseUser mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,29 +99,9 @@ public class MainActivity extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
 
-                        // Retrieve the user's uid
-                        String userUID = dataSnapshot.child("uid").getValue().toString();
-                        String userEmail = dataSnapshot.child("emailAddress").getValue().toString();
-                        System.out.println("userEmail is " + userEmail);
-                        System.out.println("================ Current User is " + mAuth.getCurrentUser());
-
-                        /*
-                        TODO: Not able to sign in yet.
-                         */
                         // Sign in
-                        mAuth.signInWithEmailAndPassword(userEmail, password);
-                        System.out.println("================ Current User is " + mAuth.getCurrentUser());
-
-                        // Move Activity
-                        Intent intent = new Intent(MainActivity.this, StudentHomeActivity.class);
-                        Bundle extras = new Bundle();
-
-                        extras.putString("userID", username);
-                        extras.putString("userUID", userUID);
-                        extras.putString("userType", "student");
-                        intent.putExtras(extras);
-                        startActivity(intent);
-
+                        String userEmail = dataSnapshot.child("emailAddress").getValue().toString();
+                        signIn(userEmail, password);
                     } else {
                         Toast.makeText(MainActivity.this,
                                 "This ID doesn't exist", Toast.LENGTH_SHORT).show();
@@ -133,31 +117,15 @@ public class MainActivity extends AppCompatActivity {
 
         // Police Login
         if (selectedUserType.equals("gtpd")) {
-            myRef = FirebaseDatabase.getInstance().getReference("gtcp/user/police");
+            myRef = FirebaseDatabase.getInstance().getReference("gtcp/user/police").child(username);
             myRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
 
-                        // Retrieve the user's uid
-                        DataSnapshot userUIDDS = dataSnapshot.child("uid");
-                        DataSnapshot userEmailDS = dataSnapshot.child("emailAddress");
-                        String userUID = userUIDDS.getValue().toString();
-                        String userEmail = userEmailDS.getValue().toString();
-
-
                         // Sign in
-                        mAuth.signInWithEmailAndPassword(userEmail, password);
-
-                        // Move Activity
-                        Intent intent = new Intent(MainActivity.this, PoliceHomeActivity.class);
-                        Bundle extras = new Bundle();
-
-                        extras.putString("userID", username);
-                        extras.putString("userUID", userUID);
-                        extras.putString("userType", "police");
-                        intent.putExtras(extras);
-                        startActivity(intent);
+                        String userEmail = dataSnapshot.child("emailAddress").getValue().toString();
+                        signIn(userEmail, password);
 
                     } else {
                         Toast.makeText(MainActivity.this,
@@ -223,5 +191,33 @@ public class MainActivity extends AppCompatActivity {
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             FirebaseAuth.getInstance().signOut();
         }
+    }
+
+    /**
+     * Sign in with inputs of email address and password by user.
+     *
+     * @param email user's email address
+     * @param password user's password
+     */
+    private void signIn(String email, String password) {
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(MainActivity.this,
+                                    "Login successful!!!", Toast.LENGTH_SHORT).show();
+
+                            // Move to userHomeActivity
+                            Intent intent = new Intent(MainActivity.this, StudentHomeActivity.class);
+                            Bundle extras = new Bundle();
+                            extras.putString("userUID", FirebaseAuth.getInstance().getCurrentUser().getUid());
+                            intent.putExtras(extras);
+                            startActivity(intent);
+                        } else {
+                            System.out.println("Log-in Failed!!");
+                        }
+                    }
+                });
     }
 }

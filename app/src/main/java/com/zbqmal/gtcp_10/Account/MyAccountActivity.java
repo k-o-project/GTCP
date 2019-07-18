@@ -1,5 +1,6 @@
 package com.zbqmal.gtcp_10.Account;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,8 +12,11 @@ import android.widget.ImageButton;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.zbqmal.gtcp_10.Main.MainActivity;
 import com.zbqmal.gtcp_10.R;
 
@@ -25,8 +29,8 @@ public class MyAccountActivity extends AppCompatActivity {
     private EditText userPhoneNum;
     private ImageButton backButton;
 
-    DatabaseReference mRef;
-
+    DatabaseReference mRefUserChild;
+    DatabaseReference mRefCurrUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,19 +68,56 @@ public class MyAccountActivity extends AppCompatActivity {
             switch (userData.getString("USERTYPE")) {
 
                 case "student" :
-                    mRef = FirebaseDatabase.getInstance().getReference("gtcp/user/student").child(userData.getString("ID"));
-                    userId.setText(mRef.child("id").toString());
-                    userPW.setText(mRef.child("password").toString());
-                    userEmail.setText(mRef.child("emailAddress").toString());
-                    userPhoneNum.setText(mRef.child("phoneNumber").toString());
+                    mRefUserChild = FirebaseDatabase.getInstance().getReference("gtcp/user/student");
+                    mRefCurrUser = mRefUserChild.child(currUser.getUid());
+                    DatabaseReference userid = mRefCurrUser.getParent();
+
+                    userid.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            String id = dataSnapshot.child("id").getValue().toString();
+                            String pw = dataSnapshot.child("password").getValue().toString();
+                            String email = dataSnapshot.child("emailAddress").getValue().toString();
+                            String pn = dataSnapshot.child("phoneNumber").getValue().toString();
+
+                            userId.setText(id);
+                            userPW.setText(pw);
+                            userEmail.setText(email);
+                            userPhoneNum.setText(pn);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
                     break;
 
                 case "police" :
-                    mRef = FirebaseDatabase.getInstance().getReference("gtcp/user/police");
-                    userId.setText(mRef.child("id").toString());
-                    userPW.setText(mRef.child("password").toString());
-                    userEmail.setText(mRef.child("emailAddress").toString());
-                    userPhoneNum.setText(mRef.child("phoneNumber").toString());
+                    mRefUserChild = FirebaseDatabase.getInstance().getReference("gtcp/user/police");
+                    mRefCurrUser = mRefUserChild.child(currUser.getUid());
+                    DatabaseReference userid1 = mRefCurrUser.getParent();
+
+                    System.out.println("************* " + userid1);
+                    userid1.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            String id = dataSnapshot.child("id").getValue().toString();
+                            String pw = dataSnapshot.child("password").getValue().toString();
+                            String email = dataSnapshot.child("emailAddress").getValue().toString();
+                            String pn = dataSnapshot.child("phoneNumber").getValue().toString();
+
+                            userId.setText(id);
+                            userPW.setText(pw);
+                            userEmail.setText(email);
+                            userPhoneNum.setText(pn);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
                     break;
             }
 

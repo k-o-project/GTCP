@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -23,6 +25,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     //widgets
     private EditText userIdInput;
     private Button verifyBtn;
+    private RadioGroup userTypeRadioGroup;
+    private RadioButton userTypeRadioButton;
 
     //firebase database
     private FirebaseDatabase mFirebasDatabase;
@@ -35,6 +39,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
         verifyBtn = findViewById(R.id.verifyForgotPasswordBtn);
         userIdInput = findViewById(R.id.UserIdNum);
+        userTypeRadioGroup = findViewById(R.id.forgotUserType);
 
         mFirebasDatabase = FirebaseDatabase.getInstance();
 
@@ -53,39 +58,83 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
                 } else {
 
-                    //access to user data
-                    myRef = mFirebasDatabase.getReference("gtcp/user/student").child(userIdInput.getText().toString());
+                    int selectedUserTypeID = userTypeRadioGroup.getCheckedRadioButtonId();
+                    userTypeRadioButton = findViewById(selectedUserTypeID);
+                    String selectedUserType = userTypeRadioButton.getText().toString().toLowerCase();
 
-                    myRef.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                            if (dataSnapshot.exists()) {
+                    //student user
+                    if (selectedUserType.equals("student")) {
 
-                                DataSnapshot userPhoneNumDS = dataSnapshot.child("phoneNumber");
-                                String userPhoneNum = userPhoneNumDS.getValue().toString();
+                        myRef = mFirebasDatabase.getReference("gtcp/user/student").child(userIdInput.getText().toString());
 
-                                Intent intent = new Intent(ForgotPasswordActivity.this, VerifyActivity.class);
-                                Bundle extras = new Bundle();
 
-                                extras.putString("ID", userIdInput.getText().toString());
-                                extras.putString("PHONENUMBER", userPhoneNum);
-                                extras.putString("WHERE_IS_FROM", "ForgotPassword");
-                                intent.putExtras(extras);
-                                startActivity(intent);
+                        myRef.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()) {
 
-                            } else {
-                                Toast.makeText(ForgotPasswordActivity.this,
-                                        "This ID doesn't exist", Toast.LENGTH_SHORT).show();
+                                    DataSnapshot userPhoneNumDS = dataSnapshot.child("phoneNumber");
+                                    String userPhoneNum = userPhoneNumDS.getValue().toString();
+
+                                    Intent intent = new Intent(ForgotPasswordActivity.this, VerifyActivity.class);
+                                    Bundle extras = new Bundle();
+
+                                    extras.putString("ID", userIdInput.getText().toString());
+                                    extras.putString("PHONENUMBER", userPhoneNum);
+                                    extras.putString("WHERE_IS_FROM", "ForgotPassword");
+                                    extras.putString("USERTYPE", "student");
+                                    intent.putExtras(extras);
+                                    startActivity(intent);
+
+                                } else {
+                                    Toast.makeText(ForgotPasswordActivity.this,
+                                            "This ID doesn't exist", Toast.LENGTH_SHORT).show();
+                                }
                             }
 
-                        }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            }
+                        });
+                    }
 
-                        }
-                    });
+                    // police user
+                    if (selectedUserType.equals("gtpd")) {
+                        myRef = FirebaseDatabase.getInstance().getReference("gtcp/user/police").child(userIdInput.getText().toString());
+                        ;
+                        myRef.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()) {
+
+                                    DataSnapshot userPhoneNumDS = dataSnapshot.child("phoneNumber");
+                                    String userPhoneNum = userPhoneNumDS.getValue().toString();
+
+                                    Intent intent = new Intent(ForgotPasswordActivity.this, VerifyActivity.class);
+                                    Bundle extras = new Bundle();
+
+                                    extras.putString("ID", userIdInput.getText().toString());
+                                    extras.putString("PHONENUMBER", userPhoneNum);
+                                    extras.putString("WHERE_IS_FROM", "ForgotPassword");
+                                    extras.putString("USERTYPE", "police");
+                                    intent.putExtras(extras);
+                                    startActivity(intent);
+
+                                } else {
+                                    Toast.makeText(ForgotPasswordActivity.this,
+                                            "This ID doesn't exist", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
+
                 }
             }
         });

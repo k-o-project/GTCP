@@ -54,10 +54,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
                 } else {
 
-                    Toast.makeText(ResetPasswordActivity.this,
-                            "Your password has been updated", Toast.LENGTH_SHORT).show();
-
-                    //user id
+                    //user info
                     String userID = getIntent().getExtras().getString("ID");
                     String userType = getIntent().getExtras().getString("USERTYPE");
 
@@ -66,10 +63,13 @@ public class ResetPasswordActivity extends AppCompatActivity {
                         case "student" :
                             userRef.child("gtcp/user/student").child(userID).child("password").setValue(newPW.getText().toString());
                             break;
-                        case "gtpd" :
+                        case "police" :
                             userRef.child("gtcp/user/police").child(userID).child("password").setValue(newPW.getText().toString());
                             break;
                     }
+
+                    Toast.makeText(ResetPasswordActivity.this,
+                            "Your password has been updated", Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(ResetPasswordActivity.this, MainActivity.class);
                     startActivity(intent);

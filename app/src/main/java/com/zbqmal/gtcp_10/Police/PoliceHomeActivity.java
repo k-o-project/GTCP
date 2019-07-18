@@ -27,11 +27,10 @@ public class PoliceHomeActivity extends AppCompatActivity {
 
         //get user's id and type
         final String userID = userData.getString("ID");
-        final String userType = userData.getString("USERTYPE");
 
         //passing user's id and type
         userData.putString("ID",userID);
-        userData.putString("USERTYPE", userType);
+        userData.putString("USERTYPE", "police");
 
         intent.putExtras(userData);
 

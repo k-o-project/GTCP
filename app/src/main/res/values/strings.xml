@@ -1,4 +1,5 @@
 <resources>
+    <string name="google_map_api_key">AIzaSyBXwmKZ1mZoOdNVM0wFiM-k9MuAzhUO5uM</string>
     <string name="app_name">GTCP_1.0</string>
     <color name="mainColor">#061e46</color>
     <color name="ButtonMainColor">#ff9d00</color>

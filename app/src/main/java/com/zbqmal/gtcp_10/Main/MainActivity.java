@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton userTypeRadioButton;
     private DatabaseReference myRef;
     private FirebaseAuth mAuth;
+    private boolean mLocationPermissionGranted = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

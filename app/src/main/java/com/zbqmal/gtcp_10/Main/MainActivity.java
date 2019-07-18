@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         /*
-        TODO: More conditions using regex
+        TODO: More conditions (using regex and so on)
          */
 
         // Student Login
@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
                         // Sign in
                         String userEmail = dataSnapshot.child("emailAddress").getValue().toString();
-                        signIn(userEmail, password);
+                        signInStudentUser(userEmail, password);
                     } else {
                         Toast.makeText(MainActivity.this,
                                 "This ID doesn't exist", Toast.LENGTH_SHORT).show();
@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
 
                         // Sign in
                         String userEmail = dataSnapshot.child("emailAddress").getValue().toString();
-                        signIn(userEmail, password);
+                        signInPoliceUser(userEmail, password);
 
                     } else {
                         Toast.makeText(MainActivity.this,
@@ -195,12 +195,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Sign in with inputs of email address and password by user.
+     * A student user Sign in with inputs of email address and password by user.
      *
      * @param email user's email address
      * @param password user's password
      */
-    private void signIn(String email, String password) {
+    private void signInStudentUser(String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -211,6 +211,34 @@ public class MainActivity extends AppCompatActivity {
 
                             // Move to userHomeActivity
                             Intent intent = new Intent(MainActivity.this, StudentHomeActivity.class);
+                            Bundle extras = new Bundle();
+                            extras.putString("userUID", FirebaseAuth.getInstance().getCurrentUser().getUid());
+                            intent.putExtras(extras);
+                            startActivity(intent);
+                        } else {
+                            System.out.println("Log-in Failed!!");
+                        }
+                    }
+                });
+    }
+
+    /**
+     * A police user Sign in with inputs of email address and password by user.
+     *
+     * @param email user's email address
+     * @param password user's password
+     */
+    private void signInPoliceUser(String email, String password) {
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(MainActivity.this,
+                                    "Login successful!!!", Toast.LENGTH_SHORT).show();
+
+                            // Move to userHomeActivity
+                            Intent intent = new Intent(MainActivity.this, PoliceHomeActivity.class);
                             Bundle extras = new Bundle();
                             extras.putString("userUID", FirebaseAuth.getInstance().getCurrentUser().getUid());
                             intent.putExtras(extras);

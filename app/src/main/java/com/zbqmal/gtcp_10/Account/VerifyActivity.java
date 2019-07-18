@@ -119,7 +119,6 @@ public class VerifyActivity extends AppCompatActivity {
                         .addOnCompleteListener(VerifyActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                Toast.makeText(VerifyActivity.this, "Inside the firebaseAuth method", Toast.LENGTH_SHORT).show();
                                 if (task.isSuccessful()) {
                                     // Get user's uid
                                     String userUID = mAuth.getCurrentUser().getUid();

@@ -12,6 +12,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,6 +34,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     //firebase database
     private FirebaseDatabase mFirebasDatabase;
     private DatabaseReference myRef;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +46,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         userTypeRadioGroup = findViewById(R.id.forgotUserType);
 
         mFirebasDatabase = FirebaseDatabase.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
         verifyBtn.setOnClickListener(new View.OnClickListener() {
 
@@ -57,7 +62,6 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                     userIdInput.setError("Invalid ID number");
 
                 } else {
-
                     int selectedUserTypeID = userTypeRadioGroup.getCheckedRadioButtonId();
                     userTypeRadioButton = findViewById(selectedUserTypeID);
                     String selectedUserType = userTypeRadioButton.getText().toString().toLowerCase();
@@ -66,7 +70,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                     //student user
                     if (selectedUserType.equals("student")) {
 
-                        myRef = mFirebasDatabase.getReference("gtcp/user/student").child(userIdInput.getText().toString());
+                        myRef = FirebaseDatabase.getInstance().getReference("gtcp/user/student").child(userIdInput.getText().toString());
 
 
                         myRef.addValueEventListener(new ValueEventListener() {
@@ -74,18 +78,23 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 if (dataSnapshot.exists()) {
 
-                                    DataSnapshot userPhoneNumDS = dataSnapshot.child("phoneNumber");
-                                    String userPhoneNum = userPhoneNumDS.getValue().toString();
+                                    DataSnapshot userEmailAddr = dataSnapshot.child("emailAddress");
+                                    String userEmail = userEmailAddr.getValue().toString();
 
-                                    Intent intent = new Intent(ForgotPasswordActivity.this, VerifyActivity.class);
-                                    Bundle extras = new Bundle();
+                                    mAuth.sendPasswordResetEmail(userEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Toast.makeText(ForgotPasswordActivity.this, "Reset password link sent", Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(ForgotPasswordActivity.this, MainActivity.class);
 
-                                    extras.putString("ID", userIdInput.getText().toString());
-                                    extras.putString("PHONENUMBER", userPhoneNum);
-                                    extras.putString("WHERE_IS_FROM", "ForgotPassword");
-                                    extras.putString("USERTYPE", "student");
-                                    intent.putExtras(extras);
-                                    startActivity(intent);
+
+                                                startActivity(intent);
+                                            } else {
+                                                Toast.makeText(ForgotPasswordActivity.this, "Error Occured", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
 
                                 } else {
                                     Toast.makeText(ForgotPasswordActivity.this,
@@ -103,24 +112,28 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                     // police user
                     if (selectedUserType.equals("gtpd")) {
                         myRef = FirebaseDatabase.getInstance().getReference("gtcp/user/police").child(userIdInput.getText().toString());
-                        ;
                         myRef.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 if (dataSnapshot.exists()) {
 
-                                    DataSnapshot userPhoneNumDS = dataSnapshot.child("phoneNumber");
-                                    String userPhoneNum = userPhoneNumDS.getValue().toString();
+                                    DataSnapshot userEmailAddr = dataSnapshot.child("emailAddress");
+                                    String userEmail = userEmailAddr.getValue().toString();
 
-                                    Intent intent = new Intent(ForgotPasswordActivity.this, VerifyActivity.class);
-                                    Bundle extras = new Bundle();
+                                    mAuth.sendPasswordResetEmail(userEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Toast.makeText(ForgotPasswordActivity.this, "Reset password link sent", Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(ForgotPasswordActivity.this, MainActivity.class);
 
-                                    extras.putString("ID", userIdInput.getText().toString());
-                                    extras.putString("PHONENUMBER", userPhoneNum);
-                                    extras.putString("WHERE_IS_FROM", "ForgotPassword");
-                                    extras.putString("USERTYPE", "police");
-                                    intent.putExtras(extras);
-                                    startActivity(intent);
+
+                                                startActivity(intent);
+                                            } else {
+                                                Toast.makeText(ForgotPasswordActivity.this, "Error Occured", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
 
                                 } else {
                                     Toast.makeText(ForgotPasswordActivity.this,

@@ -41,24 +41,6 @@
         app:layout_constraintTop_toBottomOf="@+id/createUsernameText"
         app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/createPasswordText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Password"
-        android:textColor="@color/common_google_signin_btn_text_dark_default"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.154"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.285" />
-
     <EditText
         android:id="@+id/userEmailInput"
         android:layout_width="300dp"
@@ -126,22 +108,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.614" />
-
-    <EditText
-        android:id="@+id/userPWInput"
-        android:layout_width="300dp"
-        android:layout_height="45dp"
-        android:layout_marginBottom="356dp"
-        android:background="@drawable/inputfield_shape"
-        android:ems="10"
-        android:inputType="text"
-        android:textColor="@android:color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/createEmailAddressText"
-        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/logoutButton"

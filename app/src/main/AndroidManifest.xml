@@ -45,7 +45,6 @@
             android:required="false" />
 
         <activity android:name=".Account.VerifyActivity" />
-        <activity android:name=".Account.ResetPasswordActivity" />
         <activity android:name=".Account.MyAccountActivity" />
         <activity android:name=".Account.ForgotPasswordActivity" />
         <activity android:name=".Account.CreateAccountActivity" />

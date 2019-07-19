@@ -153,16 +153,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * if user type is police depart., access to GTPD home activity
-     *
-     * @param view police home activity
-     */
-    public void goToPoliceHomeActivity(View view) {
-        Intent intent = new Intent(this, PoliceHomeActivity.class);
-        startActivity(intent);
-    }
-
-    /**
      *
      * @param view view to pass to ForgotPasswordActivity
      * Sends user to ForgotPassword activity.
@@ -207,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(MainActivity.this,
-                                    "Login successful!!!", Toast.LENGTH_SHORT).show();
+                                    "Login Successful", Toast.LENGTH_SHORT).show();
 
                             // Move to userHomeActivity
                             Intent intent = new Intent(MainActivity.this, StudentHomeActivity.class);
@@ -216,7 +206,8 @@ public class MainActivity extends AppCompatActivity {
                             intent.putExtras(extras);
                             startActivity(intent);
                         } else {
-                            System.out.println("Log-in Failed!!");
+                            Toast.makeText(MainActivity.this,
+                                    "Login Failed", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -235,7 +226,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(MainActivity.this,
-                                    "Login successful!!!", Toast.LENGTH_SHORT).show();
+                                    "Login Successful", Toast.LENGTH_SHORT).show();
 
                             // Move to userHomeActivity
                             Intent intent = new Intent(MainActivity.this, PoliceHomeActivity.class);
@@ -244,7 +235,8 @@ public class MainActivity extends AppCompatActivity {
                             intent.putExtras(extras);
                             startActivity(intent);
                         } else {
-                            System.out.println("Log-in Failed!!");
+                            Toast.makeText(MainActivity.this,
+                                    "Login Failed", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

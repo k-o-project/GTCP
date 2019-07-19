@@ -127,11 +127,11 @@ public class VerifyActivity extends AppCompatActivity {
                                     UserType newAccount;
                                     switch (userUserType) {
                                         case "student":
-                                            newAccount = new Student(userID, userUID, userPassword, userEmail, userPhoneNumber);
+                                            newAccount = new Student(userID, userUID, userEmail, userPhoneNumber);
                                             mRootRef.child("gtcp/user/student").child(userID).setValue(newAccount);
                                             break;
                                         case "gtpd":
-                                            newAccount = new Police(userID, userUID, userPassword, userEmail, userPhoneNumber);
+                                            newAccount = new Police(userID, userUID, userEmail, userPhoneNumber);
                                             mRootRef.child("gtcp/user/police").child(userID).setValue(newAccount);
                                             break;
                                         default:

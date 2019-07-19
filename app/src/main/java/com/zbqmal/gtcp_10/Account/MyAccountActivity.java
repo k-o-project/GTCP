@@ -39,7 +39,6 @@ public class MyAccountActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         userId = findViewById(R.id.userIdInput);
-        userPW = findViewById(R.id.userPWInput);
         userEmail = findViewById(R.id.userEmailInput);
         userPhoneNum = findViewById(R.id.userPhoneNumInput);
         backButton = findViewById(R.id.closeButton);
@@ -76,12 +75,10 @@ public class MyAccountActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             String id = dataSnapshot.child("id").getValue().toString();
-                            String pw = dataSnapshot.child("password").getValue().toString();
                             String email = dataSnapshot.child("emailAddress").getValue().toString();
                             String pn = dataSnapshot.child("phoneNumber").getValue().toString();
 
                             userId.setText(id);
-                            userPW.setText(pw);
                             userEmail.setText(email);
                             userPhoneNum.setText(pn);
                         }
@@ -103,12 +100,10 @@ public class MyAccountActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             String id = dataSnapshot.child("id").getValue().toString();
-                            String pw = dataSnapshot.child("password").getValue().toString();
                             String email = dataSnapshot.child("emailAddress").getValue().toString();
                             String pn = dataSnapshot.child("phoneNumber").getValue().toString();
 
                             userId.setText(id);
-                            userPW.setText(pw);
                             userEmail.setText(email);
                             userPhoneNum.setText(pn);
                         }

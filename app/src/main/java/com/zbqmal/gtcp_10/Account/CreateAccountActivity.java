@@ -112,7 +112,6 @@ public class CreateAccountActivity extends AppCompatActivity {
                         extras.putString("EMAILADDRESS", currentEmailAddress);
                         extras.putString("PHONENUMBER", currentPhoneNumber);
                         extras.putString("USERTYPE", selectedUserType);
-                        extras.putString("WHERE_IS_FROM", "CreateAccount");
                         intent.putExtras(extras);
                         startActivity(intent);
                     }

@@ -99,59 +99,50 @@ public class VerifyActivity extends AppCompatActivity {
         //Get Extras from the previous activity
         Bundle passedObject = getIntent().getExtras();
 
-        switch (passedObject.getString("WHERE_IS_FROM")) {
+        // Setting intent
+        Intent intent = new Intent(VerifyActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
-            case "CreateAccount":
+        // User information
+        final String userID = passedObject.getString("ID");
+        final String userPassword = passedObject.getString("PASSWORD");
+        final String userEmail = passedObject.getString("EMAILADDRESS");
+        final String userPhoneNumber = passedObject.getString("PHONENUMBER");
+        final String userUserType = passedObject.getString("USERTYPE");
 
-                // Setting intent
-                Intent intent = new Intent(VerifyActivity.this, MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        // Create User in Firebase with email and password
+        mAuth.createUserWithEmailAndPassword(userEmail, userPassword)
+                .addOnCompleteListener(VerifyActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Get user's uid
+                            String userUID = mAuth.getCurrentUser().getUid();
 
-                // User information
-                final String userID = passedObject.getString("ID");
-                final String userPassword = passedObject.getString("PASSWORD");
-                final String userEmail = passedObject.getString("EMAILADDRESS");
-                final String userPhoneNumber = passedObject.getString("PHONENUMBER");
-                final String userUserType = passedObject.getString("USERTYPE");
-
-                // Create User in Firebase with email and password
-                mAuth.createUserWithEmailAndPassword(userEmail, userPassword)
-                        .addOnCompleteListener(VerifyActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // Get user's uid
-                                    String userUID = mAuth.getCurrentUser().getUid();
-
-                                    // Store user's information in Firebase Database
-                                    UserType newAccount;
-                                    switch (userUserType) {
-                                        case "student":
-                                            newAccount = new Student(userID, userUID, userEmail, userPhoneNumber);
-                                            mRootRef.child("gtcp/user/student").child(userID).setValue(newAccount);
-                                            break;
-                                        case "gtpd":
-                                            newAccount = new Police(userID, userUID, userEmail, userPhoneNumber);
-                                            mRootRef.child("gtcp/user/police").child(userID).setValue(newAccount);
-                                            break;
-                                        default:
-                                            // Exception
-                                            Toast.makeText(getApplicationContext(), "UserType case Exception occurred.",Toast.LENGTH_SHORT).show();
-                                            break;
-                                    }
-                                    Toast.makeText(VerifyActivity.this, "Account has been created.",Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(VerifyActivity.this, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
-                                }
+                            // Store user's information in Firebase Database
+                            UserType newAccount;
+                            switch (userUserType) {
+                                case "student":
+                                    newAccount = new Student(userID, userUID, userEmail, userPhoneNumber);
+                                    mRootRef.child("gtcp/user/student").child(userID).setValue(newAccount);
+                                    break;
+                                case "gtpd":
+                                    newAccount = new Police(userID, userUID, userEmail, userPhoneNumber);
+                                    mRootRef.child("gtcp/user/police").child(userID).setValue(newAccount);
+                                    break;
+                                default:
+                                    // Exception
+                                    Toast.makeText(getApplicationContext(), "UserType case Exception occurred.",Toast.LENGTH_SHORT).show();
+                                    break;
                             }
-                        });
-                startActivity(intent);
-                break;
-
-            default:
-                break;
-        }
+                            Toast.makeText(VerifyActivity.this, "Account has been created.",Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(VerifyActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+        startActivity(intent);
     }
 
     /**

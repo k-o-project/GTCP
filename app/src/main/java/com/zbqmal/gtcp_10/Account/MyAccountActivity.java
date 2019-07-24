@@ -24,7 +24,6 @@ public class MyAccountActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private EditText userId;
-    private EditText userPW;
     private EditText userEmail;
     private EditText userPhoneNum;
     private ImageButton backButton;
@@ -55,32 +54,37 @@ public class MyAccountActivity extends AppCompatActivity {
     }
 
     private void getUserAccount() {
-        FirebaseUser currUser = mAuth.getCurrentUser();
+
+        final FirebaseUser currUser = mAuth.getCurrentUser();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
 
         if (currUser == null) {
             Toast.makeText(MyAccountActivity.this, "You have not logged in", Toast.LENGTH_SHORT).show();
             return;
         } else {
+
             //user logged in
-            Bundle userData = getIntent().getExtras();
 
-            switch (userData.getString("USERTYPE")) {
+            Bundle userType = getIntent().getExtras();
 
-                case "student" :
-                    mRefUserChild = FirebaseDatabase.getInstance().getReference("gtcp/user/student");
-                    mRefCurrUser = mRefUserChild.child(currUser.getUid());
-                    DatabaseReference userid = mRefCurrUser.getParent();
+            switch (userType.getString("USERTYPE")) {
 
-                    userid.addValueEventListener(new ValueEventListener() {
+                case "student":
+                    mRefUserChild = database.getReference("gtcp/user/student").child(currUser.getUid());
+
+                    mRefUserChild.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            String id = dataSnapshot.child("id").getValue().toString();
-                            String email = dataSnapshot.child("emailAddress").getValue().toString();
-                            String pn = dataSnapshot.child("phoneNumber").getValue().toString();
 
-                            userId.setText(id);
-                            userEmail.setText(email);
-                            userPhoneNum.setText(pn);
+                            if (dataSnapshot.exists()) {
+                                DataSnapshot userid= dataSnapshot.child("id");
+                                DataSnapshot userpn = dataSnapshot.child("phoneNumber");
+                                userId.setText(userid.toString());
+                                userPhoneNum.setText(userpn.toString());
+                                userEmail.setText(currUser.getEmail());
+                            } else {
+                                Toast.makeText(MyAccountActivity.this, "Error Occurred", Toast.LENGTH_SHORT).show();
+                            }
                         }
 
                         @Override
@@ -90,31 +94,14 @@ public class MyAccountActivity extends AppCompatActivity {
                     });
                     break;
 
-                case "police" :
-                    mRefUserChild = FirebaseDatabase.getInstance().getReference("gtcp/user/police");
-                    mRefCurrUser = mRefUserChild.child(currUser.getUid());
-                    DatabaseReference userid1 = mRefCurrUser.getParent();
-
-                    System.out.println("************* " + userid1);
-                    userid1.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            String id = dataSnapshot.child("id").getValue().toString();
-                            String email = dataSnapshot.child("emailAddress").getValue().toString();
-                            String pn = dataSnapshot.child("phoneNumber").getValue().toString();
-
-                            userId.setText(id);
-                            userEmail.setText(email);
-                            userPhoneNum.setText(pn);
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
+                case "police":
                     break;
             }
+
+
+//            userId.setText(currUser.getDisplayName());
+//            userPhoneNum.setText(currUser.getPhoneNumber());
+//            userEmail.setText(currUser.getEmail());
 
         }
     }

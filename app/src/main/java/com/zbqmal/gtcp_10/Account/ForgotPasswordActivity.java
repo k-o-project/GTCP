@@ -91,7 +91,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
                                                 startActivity(intent);
                                             } else {
-                                                Toast.makeText(ForgotPasswordActivity.this, "Error Occured", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(ForgotPasswordActivity.this, "Error Occurred", Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     });

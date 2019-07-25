@@ -12,7 +12,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.zbqmal.gtcp_10.Main.MainActivity;
 import com.zbqmal.gtcp_10.R;
 
@@ -94,7 +93,6 @@ public class CreateAccountActivity extends AppCompatActivity {
                 if (isPhoneNumberCorrect) {
 
                     boolean isGoodToMove = false;
-                    String userType;
 
                     if (selectedUserType.equals("student") || selectedUserType.equals("gtpd")) {
                         // Set isGoodToMove when selectedUserType is either one
@@ -114,7 +112,6 @@ public class CreateAccountActivity extends AppCompatActivity {
                         extras.putString("EMAILADDRESS", currentEmailAddress);
                         extras.putString("PHONENUMBER", currentPhoneNumber);
                         extras.putString("USERTYPE", selectedUserType);
-                        extras.putString("WHERE_IS_FROM", "CreateAccount");
                         intent.putExtras(extras);
                         startActivity(intent);
                     }

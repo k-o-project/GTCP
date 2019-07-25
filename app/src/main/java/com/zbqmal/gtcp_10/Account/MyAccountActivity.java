@@ -56,7 +56,7 @@ public class MyAccountActivity extends AppCompatActivity {
     private void getUserAccount() {
 
         final FirebaseUser currUser = mAuth.getCurrentUser();
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
 
         if (currUser == null) {
             Toast.makeText(MyAccountActivity.this, "You have not logged in", Toast.LENGTH_SHORT).show();
@@ -70,20 +70,18 @@ public class MyAccountActivity extends AppCompatActivity {
             switch (userType.getString("USERTYPE")) {
 
                 case "student":
-                    mRefUserChild = database.getReference("gtcp/user/student").child(currUser.getUid());
+
+                    mRefUserChild = database.getReference("gtcp/user/student");
 
                     mRefUserChild.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                            if (dataSnapshot.exists()) {
-                                DataSnapshot userid= dataSnapshot.child("id");
-                                DataSnapshot userpn = dataSnapshot.child("phoneNumber");
-                                userId.setText(userid.toString());
-                                userPhoneNum.setText(userpn.toString());
-                                userEmail.setText(currUser.getEmail());
-                            } else {
-                                Toast.makeText(MyAccountActivity.this, "Error Occurred", Toast.LENGTH_SHORT).show();
+                            for (DataSnapshot data: dataSnapshot.getChildren()) {
+                                if (data.child("uid").getValue().equals(currUser.getUid())) {
+                                    userId.setText(data.child("id").getValue().toString());
+                                    userEmail.setText(data.child("emailAddress").getValue().toString());
+                                    userPhoneNum.setText(data.child("phoneNumber").getValue().toString());
+                                }
                             }
                         }
 
@@ -95,14 +93,28 @@ public class MyAccountActivity extends AppCompatActivity {
                     break;
 
                 case "police":
+
+                    mRefUserChild = database.getReference("gtcp/user/police");
+
+                    mRefUserChild.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot data: dataSnapshot.getChildren()) {
+                                if (data.child("uid").getValue().equals(currUser.getUid())) {
+                                    userId.setText(data.child("id").getValue().toString());
+                                    userEmail.setText(data.child("emailAddress").getValue().toString());
+                                    userPhoneNum.setText(data.child("phoneNumber").getValue().toString());
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
                     break;
             }
-
-
-//            userId.setText(currUser.getDisplayName());
-//            userPhoneNum.setText(currUser.getPhoneNumber());
-//            userEmail.setText(currUser.getEmail());
-
         }
     }
 

@@ -1,13 +1,22 @@
 package com.zbqmal.gtcp_10.Student;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -15,10 +24,17 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.zbqmal.gtcp_10.Account.MyAccountActivity;
 import com.zbqmal.gtcp_10.R;
 
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+
 public class StudentHomeActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private MapView studentMapView;
     private GoogleMap googleMap;
+    //    private GeoDataClient mGeoDataClient;
+//    private PlaceDetectionClient mPlaceDetectionClient;
+    private FusedLocationProviderClient client;
+    private Button searchBtn, submitBtn;
+    private EditText departureTxt, destinationTxt;
 
     private static final String MAP_VIEW_BUNDLE_KEY = "MapViewBundleKey";
 
@@ -26,6 +42,39 @@ public class StudentHomeActivity extends AppCompatActivity implements OnMapReady
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_home);
+
+        requestPermission();
+
+//        // Construct a GeoDataClient.
+//        mGeoDataClient = Places.getGeoDataClient(this, null);
+//
+//        // Construct a PlaceDetectionClient.
+//        mPlaceDetectionClient = Places.getPlaceDetectionClient(this, null);
+
+        // Construct a FusedLocationProviderClient.
+        client = LocationServices.getFusedLocationProviderClient(this);
+
+        searchBtn = findViewById(R.id.submitDestinationBtn);
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkSelfPermission(ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+                    return;
+                }
+                client.getLastLocation().addOnSuccessListener(StudentHomeActivity.this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+
+                        if (location != null) {
+                            System.out.println("Success!! Location is " + location.toString());
+                        }
+
+                        System.out.println("Failed to location!!!");
+                    }
+                });
+            }
+        });
 
         Bundle mapViewBundle = null;
         if (savedInstanceState != null) {
@@ -35,6 +84,10 @@ public class StudentHomeActivity extends AppCompatActivity implements OnMapReady
         studentMapView = findViewById(R.id.studentHomeMapView);
         studentMapView.onCreate(mapViewBundle);
         studentMapView.getMapAsync(this);
+    }
+
+    private void requestPermission() {
+        ActivityCompat.requestPermissions(this, new String[]{ACCESS_FINE_LOCATION}, 1);
     }
 
     public void goToStartTrackingActivity(View view) {

@@ -75,9 +75,9 @@ public class PoliceHomeActivity extends AppCompatActivity implements OnMapReadyC
     @Override
     public void onMapReady(GoogleMap map) {
         googleMap = map;
-        googleMap.setMinZoomPreference(12);
-        LatLng ny = new LatLng(40.7143528, -74.0059731);
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(ny));
+        googleMap.setMinZoomPreference(14);
+        LatLng gatech = new LatLng(33.775563, -84.396313);
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(gatech));
     }
 
     @Override

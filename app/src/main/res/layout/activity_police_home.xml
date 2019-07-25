@@ -14,12 +14,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="27dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/menuButton3"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/menuButton3" />
 
     <ImageButton
         android:id="@+id/menuButton3"
@@ -39,15 +36,13 @@
         app:srcCompat="@drawable/ic_person_black_24dp" />
 
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="399dp"
-        android:layout_height="360dp"
+        android:layout_width="395dp"
+        android:layout_height="359dp"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="6dp"
+        tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="364dp">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/user_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>

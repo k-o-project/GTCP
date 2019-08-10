@@ -12,13 +12,11 @@
         android:id="@+id/studentHomeMapView"
         android:layout_width="300dp"
         android:layout_height="253dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ToAddressInput" />
+        app:layout_constraintTop_toBottomOf="@+id/studentDestinationSpinner" />
 
     <Button
         android:id="@+id/studentDirectionSubmitBtn"
@@ -35,76 +33,24 @@
         app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/studentHomeMapView"
-        app:layout_constraintVertical_bias="0.105" />
+        app:layout_constraintVertical_bias="0.29" /><![CDATA[
         app:layout_constraintTop_toBottomOf="@+id/studentHomeMapView"
         app:layout_constraintVertical_bias="0.161" />
 
-    <EditText
-        android:id="@+id/FromAddressInput"
-        android:layout_width="300dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="412dp"
-        android:background="@drawable/inputfield_shape"
-        android:ems="10"
-        android:hint="Enter address"
-        android:inputType="text"
-        android:textColor="@color/common_google_signin_btn_text_dark_focused"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/From"
-        app:layout_constraintVertical_bias="0.0" />
+    ]]>
 
     <TextView
-        android:id="@+id/From"
+        android:id="@+id/whereToTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="From:"
+        android:text="Where To:"
         android:textColor="@color/common_google_signin_btn_text_dark_default"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.15"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MenuButton"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/To"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="To:"
-        android:textColor="@color/common_google_signin_btn_text_dark_default"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.143"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/FromAddressInput"
-        app:layout_constraintVertical_bias="0.015" />
-
-    <EditText
-        android:id="@+id/ToAddressInput"
-        android:layout_width="300dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/inputfield_shape"
-        android:ems="10"
-        android:hint="Enter address"
-        android:inputType="textPersonName"
-        android:textColor="@color/common_google_signin_btn_text_dark_focused"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/To" />
+        app:layout_constraintTop_toBottomOf="@+id/MenuButton" />
 
     <ImageButton
         android:id="@+id/MenuButton"
@@ -119,10 +65,24 @@
         android:onClick="goToMyAccountActivity"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.978"
-        app:layout_constraintStart_toEndOf="@+id/From"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toEndOf="@+id/whereToTextView"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.166"
+        app:layout_constraintVertical_bias="0.341"
         app:srcCompat="@drawable/ic_person_black_24dp" />
+
+    <Spinner
+        android:id="@+id/studentDestinationSpinner"
+        android:layout_width="300dp"
+        android:layout_height="41dp"
+        android:drawSelectorOnTop="true"
+        android:entries="@array/destination_list"
+        android:background="@drawable/inputfield_shape"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/whereToTextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,6 @@ import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -34,8 +33,7 @@ public class StudentHomeActivity extends AppCompatActivity implements OnMapReady
 //    private GeoDataClient mGeoDataClient;
 //    private PlaceDetectionClient mPlaceDetectionClient;
     private FusedLocationProviderClient client;
-    private Button searchBtn, submitBtn;
-    private EditText departureTxt, destinationTxt;
+    private Button submitBtn;
 
     private static final String MAP_VIEW_BUNDLE_KEY = "MapViewBundleKey";
 
@@ -55,11 +53,11 @@ public class StudentHomeActivity extends AppCompatActivity implements OnMapReady
         // Construct a FusedLocationProviderClient.
         client = LocationServices.getFusedLocationProviderClient(this);
 
-        searchBtn = findViewById(R.id.studentDirectionSubmitBtn);
-        searchBtn.setOnClickListener(new View.OnClickListener() {
+        submitBtn = findViewById(R.id.studentDirectionSubmitBtn);
+        submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+
             }
         });
 

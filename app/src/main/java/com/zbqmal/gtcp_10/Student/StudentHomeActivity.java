@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -30,7 +31,7 @@ public class StudentHomeActivity extends AppCompatActivity implements OnMapReady
 
     private MapView studentMapView;
     private GoogleMap googleMap;
-    //    private GeoDataClient mGeoDataClient;
+//    private GeoDataClient mGeoDataClient;
 //    private PlaceDetectionClient mPlaceDetectionClient;
     private FusedLocationProviderClient client;
     private Button searchBtn, submitBtn;
@@ -58,21 +59,7 @@ public class StudentHomeActivity extends AppCompatActivity implements OnMapReady
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkSelfPermission(ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
-                    return;
-                }
-                client.getLastLocation().addOnSuccessListener(StudentHomeActivity.this, new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-
-                        if (location != null) {
-                            System.out.println("Success!! Location is " + location.toString());
-                        }
-
-                        System.out.println("Failed to location!!!");
-                    }
-                });
             }
         });
 
@@ -160,7 +147,24 @@ public class StudentHomeActivity extends AppCompatActivity implements OnMapReady
     public void onMapReady(GoogleMap gMap) {
         googleMap = gMap;
         googleMap.setMinZoomPreference(12);
-        LatLng ny = new LatLng(40.7143528, -74.0059731);
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(ny));
+//        LatLng ny = new LatLng(40.7143528, -74.0059731);
+//        googleMap.moveCamera(CameraUpdateFactory.newLatLng(ny));
+        if (checkSelfPermission(ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            return;
+        }
+        client.getLastLocation().addOnSuccessListener(StudentHomeActivity.this, new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+
+                if (location != null) {
+                    Toast.makeText(StudentHomeActivity.this, "Success loading current location.",Toast.LENGTH_SHORT).show();
+                    LatLng ny = new LatLng(location.getLatitude(), location.getLongitude());
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLng(ny));
+                } else {
+                    Toast.makeText(StudentHomeActivity.this, "Failed to load current location.",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }

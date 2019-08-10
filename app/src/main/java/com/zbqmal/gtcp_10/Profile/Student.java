@@ -10,9 +10,9 @@ public class Student extends UserType {
     // Constructors
     public Student(String id, String uid, String emailAddress, String phoneNumber) {
 
-        from = null;
-        destination = null;
-        currentLocation = null;
+        from = "N/A";
+        destination = "N/A";
+        currentLocation = "N/A";
 
         this.setID(id);
         this.setUid(uid);

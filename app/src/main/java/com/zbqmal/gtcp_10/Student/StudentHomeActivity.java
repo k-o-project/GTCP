@@ -55,11 +55,11 @@ public class StudentHomeActivity extends AppCompatActivity implements OnMapReady
         // Construct a FusedLocationProviderClient.
         client = LocationServices.getFusedLocationProviderClient(this);
 
-        searchBtn = findViewById(R.id.submitDestinationBtn);
+        searchBtn = findViewById(R.id.studentDirectionSubmitBtn);
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                
             }
         });
 

@@ -18,8 +18,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.744" />
+        app:layout_constraintTop_toBottomOf="@+id/ToAddressInput" />
 
     <Button
         android:id="@+id/studentDirectionSubmitBtn"
@@ -39,20 +38,6 @@
         app:layout_constraintVertical_bias="0.105" />
         app:layout_constraintTop_toBottomOf="@+id/studentHomeMapView"
         app:layout_constraintVertical_bias="0.161" />
-
-    <Button
-        android:id="@+id/submitDestinationBtn"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/yellow_button_shape"
-        android:onClick="goToStartTrackingActivity"
-        android:text="OK"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.816"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ToAddressInput" />
 
     <EditText
         android:id="@+id/FromAddressInput"
@@ -109,7 +94,6 @@
         android:id="@+id/ToAddressInput"
         android:layout_width="300dp"
         android:layout_height="45dp"
-        android:layout_marginBottom="324dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/inputfield_shape"
         android:ems="10"
@@ -117,12 +101,10 @@
         android:inputType="textPersonName"
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/To"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/To" />
 
     <ImageButton
         android:id="@+id/MenuButton"

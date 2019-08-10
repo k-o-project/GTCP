@@ -7,6 +7,17 @@
     android:background="@color/mainColor"
     tools:context=".Police.PoliceHomeActivity">
 
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/police_mapView"
+        android:layout_width="345dp"
+        android:layout_height="209dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/menuButton3" />
+
     <ImageButton
         android:id="@+id/menuButton3"
         style="@style/Widget.AppCompat.ImageButton"
@@ -24,20 +35,16 @@
         app:layout_constraintVertical_bias="0.531"
         app:srcCompat="@drawable/ic_person_black_24dp" />
 
-    <!--<android.support.v7.widget.RecyclerView-->
-        <!--android:layout_width="395dp"-->
-        <!--android:layout_height="411dp"-->
-        <!--android:layout_marginStart="8dp"-->
-        <!--android:layout_marginTop="8dp"-->
-        <!--android:layout_marginEnd="8dp"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintHorizontal_bias="1.0"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:layout_constraintVertical_bias="1.0">-->
+    <LinearLayout
+        android:layout_width="395dp"
+        android:layout_height="359dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="364dp">
 
-    <!--</android.support.v7.widget.RecyclerView>-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

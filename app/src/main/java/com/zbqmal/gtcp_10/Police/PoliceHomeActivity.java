@@ -34,7 +34,7 @@ public class PoliceHomeActivity extends AppCompatActivity implements OnMapReadyC
             mapViewBundle = savedInstanceState.getBundle(MAPVIEW_BUNDLE_KEY);
         }
 
-        mMapView = (MapView) findViewById(R.id.police_mapView);
+        mMapView = (MapView) findViewById(R.id.policeMapView);
         mMapView.onCreate(mapViewBundle);
 
         mMapView.getMapAsync(this);

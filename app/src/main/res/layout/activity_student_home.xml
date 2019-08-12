@@ -25,7 +25,6 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/yellow_button_shape"
-        android:onClick="goToStartTrackingActivity"
         android:text="Submit"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -33,11 +32,7 @@
         app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/studentHomeMapView"
-        app:layout_constraintVertical_bias="0.29" /><![CDATA[
-        app:layout_constraintTop_toBottomOf="@+id/studentHomeMapView"
-        app:layout_constraintVertical_bias="0.161" />
-
-    ]]>
+        app:layout_constraintVertical_bias="0.29" />
 
     <TextView
         android:id="@+id/whereToTextView"

@@ -203,6 +203,8 @@ public class MainActivity extends AppCompatActivity {
                             Intent intent = new Intent(MainActivity.this, StudentHomeActivity.class);
                             Bundle extras = new Bundle();
                             extras.putString("userUID", FirebaseAuth.getInstance().getCurrentUser().getUid());
+                            EditText loginUsername = findViewById(R.id.loginUsername);
+                            extras.putString("userID", loginUsername.getText().toString().trim());
                             intent.putExtras(extras);
                             startActivity(intent);
                         } else {

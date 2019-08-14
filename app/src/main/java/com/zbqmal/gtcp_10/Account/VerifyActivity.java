@@ -114,15 +114,14 @@ public class VerifyActivity extends AppCompatActivity {
                             String userUID = mAuth.getCurrentUser().getUid();
 
                             // Store user's information in Firebase Database
-                            UserType newAccount;
                             switch (userUserType) {
                                 case "student":
-                                    newAccount = new Student(userID, userUID, userEmail, userPhoneNumber);
-                                    mRootRef.child("gtcp/user/student").child(userID).setValue(newAccount);
+                                    Student newStudent = new Student(userID, userUID, userEmail, userPhoneNumber);
+                                    mRootRef.child("gtcp/user/student").child(userID).setValue(newStudent);
                                     break;
                                 case "gtpd":
-                                    newAccount = new Police(userID, userUID, userEmail, userPhoneNumber);
-                                    mRootRef.child("gtcp/user/police").child(userID).setValue(newAccount);
+                                    Police newPolice = new Police(userID, userUID, userEmail, userPhoneNumber);
+                                    mRootRef.child("gtcp/user/police").child(userID).setValue(newPolice);
                                     break;
                                 default:
                                     // Exception

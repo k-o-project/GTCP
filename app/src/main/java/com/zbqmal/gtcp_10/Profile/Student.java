@@ -6,6 +6,7 @@ public class Student extends UserType {
     private String destination;
     private String currentLat;
     private String currentLng;
+    private boolean isBeingTracked;
 
     // Constructors
     public Student(String id, String uid, String emailAddress, String phoneNumber) {
@@ -13,6 +14,7 @@ public class Student extends UserType {
         destination = "N/A";
         currentLat = "N/A";
         currentLng = "N/A";
+        isBeingTracked = false;
 
         this.setID(id);
         this.setUid(uid);
